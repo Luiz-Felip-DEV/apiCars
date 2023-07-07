@@ -122,9 +122,8 @@ class Person {
         $stmt->bindValue(":_id", $this->getId(), \PDO::PARAM_INT);
 
         if ($stmt->execute()){
-            return  $this->read() ;
+            return  $this->read();
         }
-        return [];
     }
 
     public function createResponse($status_code, $mensagem){
@@ -133,11 +132,11 @@ class Person {
         header('Content-Type: application/json');
 
         $response = array (
-            'status_code' => $status_code,
-            'resp'    => $mensagem 
+            'status_code'   => $status_code,
+            'resp'          => $mensagem 
         );
 
-        return json_encode($response);
+        return json_encode((object) $response);
     }
 }
 

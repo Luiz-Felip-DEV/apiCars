@@ -22,11 +22,11 @@
         $person->setEmail($email);
         $person->setSenha($senha);
 
-        $data['user'] = $person->create();
+        $data = $person->create();
     }
 
     if ($fn === 'read') {
-        $data['user'] = $person->read();
+        $data = $person->read();
     }
 
     if ($fn == 'update' && $id > 0 && $nome != null && $idade !== null && $email !== null && $senha !== null){
@@ -34,11 +34,11 @@
         $person->setIdade($idade);
         $person->setEmail($email);
         $person->setSenha($senha);
-        $data['user'] = $person->update();
+        $data = $person->update();
     }
 
     if ($fn === 'delete' && $id > 0) {
-        $data['user'] = $person->delete();
+        $data = $person->delete();
     }
 
     $msg = '';
@@ -59,17 +59,16 @@
     }
     
 
-    if (empty($data)){
+    if (empty($data) && $fn !== 'delete'){
         die($result = $person->createResponse(500, [
-            'msm'       => 'Erro ao acessar a api',
+            'msg'       => 'Erro ao acessar a api',
             'results'   => ''
         ]));
-        return $result;
-    }{
+
+    }else{
         die($result = $person->createResponse(200, [
-            'msm'       => $msg,
+            'msg'       => $msg,
             'results'   => $data
         ]));
-        return $result; 
     }
 
