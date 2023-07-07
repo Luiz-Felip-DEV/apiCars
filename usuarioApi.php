@@ -3,14 +3,18 @@
     require_once "person.php";
 
     header("Content-Type: application/json");
-    $data = [];
+    $data = (object)
 
-    $fn     = $_REQUEST['fn']       ?? null;
-    $id     = $_REQUEST['id']       ?? 0;
-    $nome   = $_REQUEST['name']     ?? null;
-    $idade  = $_REQUEST['age']      ?? null;
-    $email  = $_REQUEST['email']    ?? null;
-    $senha  = $_REQUEST['senha']    ?? null;
+    $hash = base64_decode($_REQUEST['arquivo']);
+    $arrDados = explode('#', $hash);
+
+
+    $fn     = $arrDados[0]              ?? null;
+    $id     = $arrDados[5]              ?? 0;
+    $nome   = $arrDados[1]              ?? null;
+    $idade  = $arrDados[2]              ?? null;
+    $email  = $arrDados[3]              ?? null;
+    $senha  = $arrDados[4]              ?? null;
 
     $person = new person;
 

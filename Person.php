@@ -136,7 +136,7 @@ class Person {
             'resp'          => $mensagem 
         );
 
-        return json_encode((object) $response);
+        return json_encode( $response);
     }
 }
 
